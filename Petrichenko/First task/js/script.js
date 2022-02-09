@@ -3,11 +3,11 @@
 
 
 let personalMovieDB = {
-    count: numberOfFilms,
+    count: 0,
     movies: {},
     actors: {},
     genres: [],
-    privat: false,
+    privat: true,
     start: function (){
         personalMovieDB.count = +prompt ('Сколько фильмов вы посмотрели?', '');
     
@@ -45,36 +45,28 @@ let personalMovieDB = {
             console.log(personalMovieDB);
         }
     },
+    toggleVisibleMyDB: function() {
+        if (personalMovieDB.privat){
+            personalMovieDB.privat = false;
+        } else {
+            personalMovieDB.privat = true;
+        }
+    },
     writeYourGenres: function (){
         for (let i = 1; i <= 3 ; i++) {
             
             let c = prompt (`Ваш любимый жанр под номером ${i}`)
-            personalMovieDB.genres[i-1] = c;
+            if (c == null || c == '') {
+                i--;
+            } else {
+                personalMovieDB.genres[i-1] = c;
+            }       
             
         }
-    }
+        personalMovieDB.genres.forEach(function(item, i){
+            console.log(`Любимый жанр ${i + 1} - это ${item}`)
+            }) 
+        }
     
 };
 
-
-let options = {
-    name: 'test',
-    width: 1024,
-    height: 1024,
-    colors: {
-        border: 'black',
-        bg: 'red',
-    }
-}
-
-for (let key in options) {
-    if (typeof(options[key]) === 'object') {
-        for (let i in options[key]) {
-            console.log(`Свойство ${i} имеет значение ${options[key][i]}`);
-        }
-    } else {
-        console.log(`Свойство ${key} имеет значение ${options[key]}`);
-    }
-    
-
-}
